@@ -1,5 +1,6 @@
 <!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
-<link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABTElEQVR4nGNgGAVEgjhrv/9x1n7/qaUOBpgoc9YAAFw+JNXnMDDgIcAIY3zq3YTV9XzFfozYxNF9u+joJqzqCJk74CHAAnMhl6cBisS37RcYGBgQPsAVErgAus/Rzf/EAJEf+BAgViGxIYErznGBAQ8BRlJdDAM56+ag8KcEpZDlgAEPAZYHN+8yMDAwMCioK9PVYpi9Ax8CerMKGRkYGBgupfX/Z2CgfUjAfA6zd+BDAMZADwkYoDREYD5GtwcGBk8IwADMhV92wkIC1QcfTwlgNejzt7cMDAwMDPxmH1DElXQgNI97IdYSdPCFAMLnEPBPYC8DAwMDA9MHZwYGBiQf7kDVh+5zdH0wc9FDYvCFADqA+QAGcKUBmDgsJND14TSfKFU0BDjr9qfN87HWktK1iYwMDLjbhIT0oYMBDwGKAbn9ARgY+iEw5AEAdMKC+Z5iPL4AAAAASUVORK5CYII=">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="96x96" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <meta name="theme-color" content="#FFFBEA">
 <!-- Link previews (WhatsApp, iMessage, Slack, LinkedIn, X). If the site address changes, update the three https://pinkywinky.vercel.app addresses below -->
@@ -713,7 +714,8 @@ body.mode-night ::selection { background: #EEDAF2; color: #8D4F8E; -webkit-text-
     const h = location.hash.slice(1);
     if (LOOKS[h]) return h;
     const hr = new Date().getHours();
-    return hr >= 5 && hr < 12 ? 'morning' : hr < 16 ? 'afternoon' : hr < 19 ? 'golden' : 'night';
+    if (hr < 5 || hr >= 19) return 'night';   // 7pm to 5am
+    return hr < 12 ? 'morning' : hr < 16 ? 'afternoon' : 'golden';
   }
   let phase = phaseNow();
   const KEYS = Object.keys(DAY);
